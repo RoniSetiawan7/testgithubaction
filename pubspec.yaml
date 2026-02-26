@@ -37,7 +37,7 @@ dependencies:
   http: ^1.6.0
   image_picker: ^1.2.1
   dio: ^5.9.1
-  mnc_identifier_ocr: ^1.0.23
+  # mnc_identifier_ocr: ^1.0.23
 
 dev_dependencies:
   flutter_test:
