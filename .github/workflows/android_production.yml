@@ -16,7 +16,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.38.1'
+          flutter-version: '3.38.*'
           channel: 'stable'
 
       - name: Verify Flutter Version
@@ -34,8 +34,21 @@ jobs:
       - name: Build Release APK
         run: flutter build apk --release
 
+      # 🔥 Ambil versi dari pubspec.yaml
+      - name: Get Version
+        id: version
+        run: |
+          VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      # 🔥 Rename APK dengan versi
+      - name: Rename APK
+        run: |
+          mv build/app/outputs/flutter-apk/app-release.apk \
+          build/app/outputs/flutter-apk/app-v${VERSION}.apk
+
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: production-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name: production-release-apk-v${{ env.VERSION }}
+          path: build/app/outputs/flutter-apk/app-v${{ env.VERSION }}.apk
