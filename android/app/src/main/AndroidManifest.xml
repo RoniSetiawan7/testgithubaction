@@ -3,7 +3,6 @@
         android:label="flutter_testing"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        <activity android:name="id.mncinnovation.ocr.CaptureOCRActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
